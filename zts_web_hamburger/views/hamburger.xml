@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <template id="assets_frontend" inherit_id="portal.assets_frontend" name="Website Assets">
+    <xpath expr="//link[last()]" position="after">
+        <link rel="stylesheet" type="text/scss" href="/zts_web_hamburger/static/src/scss/font.scss"/>
+    </xpath>
+    </template>
+
+
+ 	<template id="template_header_contact_oe_structure_header_contact_1" inherit_id="website.template_header_contact" name="Template Header Contact (oe_structure_header_contact_1)">
+		<xpath expr="//*[hasclass('oe_structure')][@id='oe_structure_header_contact_1']" position="replace">
+			<div class="oe_structure oe_structure_solo" id="oe_structure_header_contact_1">
+				<section class="s_text_block pt8 pb8 o_cc o_cc2" data-snippet="s_text_block" data-name="Text">
+					<div class="container">
+						<div class="language-social">
+							<div>
+								<small>
+									<span class="text-muted webview-only"><b>Contact us</b></span>
+									<i class="fa fa-1x fa-fw fa-phone ml-3 mr-2 webview-only"/><a class="margin-mob" href="tel:+97433993155">+974 3399 3155</a>
+									<i class="fa fa-1x fa-fw fa-envelope ml-3 mr-2 webview-only"/><span><a href="mailto:info@zmakan.com">info@zmakan.com</a></span>
+								</small>
+							</div>
+							<div>
+								<div class="s_share no_icon_color" data-snippet="s_share" data-name="Social Media">
+									<a href="https://www.facebook.com/zmakan" class="s_share_facebook" target="_blank">
+										<i class="fa fa-facebook m-1"/>
+									</a>
+									<a href="https://twitter.com/TechZmakan" class="s_share_twitter" target="_blank">
+										<i class="fa fa-twitter m-1"/>
+									</a>
+									<a href="https://www.linkedin.com/company/zmakan-technical-solutions" class="s_share_linkedin" target="_blank">
+										<i class="fa fa-linkedin m-1"/>
+									</a>
+									<a href="https://www.youtube.com/channel/UCEtr_PydkRbR--gcsFssI6A" class="s_share_youtube" target="_blank">
+										<i class="fa fa-youtube m-1"/>
+									</a>
+									<a href="https://www.instagram.com/zmakan.tech/" class="s_share_instagram" target="_blank">
+										<i class="fa fa-instagram m-1"/>
+									</a>
+                                    <a style="color:#006388;font-weight: bold; border:none; padding:2% 4% 2% 4%;" t-att-href="url_for(request.httprequest.path + '?' + keep_query(), lang_code='en_US')" t-attf-class="js_change_lang #{'active' if request.lang.code=='en_US' else None}" t-if="request.env.lang == 'ar_001'">EN</a>
+                                    <a style="color:#006388;font-weight: bold; border:none; padding:2% 4% 2% 4%;" t-att-href="url_for(request.httprequest.path + '?' + keep_query(), lang_code='ar_001')" t-attf-class="js_change_lang #{'active' if request.lang.code=='ar_001' else None}" t-if="request.env.lang == 'en_US'">ع</a>
+								</div>
+							</div>
+						</div>
+					</div>
+				</section>
+			</div>
+		</xpath>
+	</template>
+
+    <!-- Navbar Nav -->
+<template id="website.navbar_nav" name="Navbar Nav">
+    <ul id="top_menu" t-attf-class="nav navbar-nav o_menu_loading #{_nav_class}">
+        <t t-raw="0"/>
+    </ul>
+</template>
+
+<!-- Header templates -->
+
+<!-- "Default" template -->
+<template id="template_header_default" inherit_id="website.layout" name="Template Header Default" active="True">
+    <xpath expr="//header//nav" position="replace">
+        <nav data-name="Navbar" class="navbar navbar-expand-lg navbar-light o_colored_level o_cc shadow-sm">
+            <div id="top_menu_container" class="container justify-content-start justify-content-lg-between">
+                <!-- Brand -->
+                <t t-call="website.placeholder_header_brand">
+                    <t t-set="_link_class" t-value="'mr-4'"/>
+                </t>
+                <!-- Navbar Toggler -->
+                <t t-call="website.navbar_toggler">
+                    <t t-set="_toggler_class" t-value="'ml-auto'"/>
+                </t>
+                <!-- Navbar Collapse -->
+                <div id="top_menu_collapse" class="collapse navbar-collapse order-last order-lg-0">
+                    <t t-call="website.navbar_nav">
+                        <t t-set="_nav_class" t-value="'flex-grow-1'"/>
+                        <!-- Menu -->
+                        <t t-foreach="website.menu_id.child_id" t-as="submenu">
+                            <t t-call="website.submenu">
+                                <t t-set="item_class" t-value="'nav-item'"/>
+                                <t t-set="link_class" t-value="'nav-link'"/>
+                            </t>
+                        </t>
+                        <!-- Sign In -->
+                        <t t-call="portal.placeholder_user_sign_in">
+                            <t t-set="_item_class" t-value="'nav-item ml-lg-auto'"/>
+                            <t t-set="_link_class" t-value="'nav-link font-weight-bold'"/>
+                        </t>
+                        <!-- User Dropdown -->
+                        <t t-call="portal.user_dropdown">
+                            <t t-set="_user_name" t-value="true"/>
+                            <t t-set="_item_class" t-value="'nav-item dropdown ml-lg-auto'"/>
+                            <t t-set="_link_class" t-value="'nav-link font-weight-bold'"/>
+                        </t>
+                    </t>
+                </div>
+                <!-- Language Selector -->
+                <t t-call="website.placeholder_header_language_selector">
+                    <t t-set="_div_classes" t-value="'ml-2'"/>
+                </t>
+                <!-- Button -->
+                <div class="oe_structure oe_structure_solo" id="oe_structure_header_default_1"/>
+            </div>
+        </nav>
+    </xpath>
+</template>
+
+</odoo>

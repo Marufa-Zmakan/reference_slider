@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="as_contact_us_map" inherit_id="website.contactus">
+        <xpath expr="//div[@id='wrap']" position="after">
+            <section class="container">
+                <style>
+                    .map-responsive{
+                        overflow:hidden;
+                        padding-bottom:56.25%;
+                        position:relative;
+                        height:0;
+                    }
+
+                    .map-responsive iframe{
+                        left:0;
+                        top:0;
+                        height:80%;
+                        width:100%;
+                        position:absolute;
+                        padding-left: 0px !important;
+                        padding-right: 0px !important;
+                    }
+<!--                    .row-full{-->
+<!--                          margin-left: calc((100vw - 100%) / -2);-->
+<!--                          width: 100vw;-->
+<!--                    }-->
+                    #front {
+                      position:absolute;
+                      width:100%;
+                      float:left;
+                      height:auto;
+                      top:80%;
+                      background-color:#0091c8;
+                    }
+                </style>
+                <div class="container">
+                  <div class="row align-items-center">
+                    <div class="col-lg-12 pt10 pb10">
+                    <div class="map-responsive">
+                        <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d14431.661932282239!2d51.5019101!3d25.2734284!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0xebf152aac8f4e139!2sZmakan%20Technical%20Solutions!5e0!3m2!1sen!2sbd!4v1643725670980!5m2!1sen!2sbd" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+                    </div>
+<!--                        <div id="front">Visit Us: Office #27, 2nd Floor, Mirqab Mall, Doha 2255, Qatar</div>-->
+                    </div>
+                </div></div>
+            </section>
+        </xpath>
+    </template>
+</odoo>
