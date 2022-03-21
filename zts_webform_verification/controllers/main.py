@@ -36,6 +36,7 @@ class Website(Website):
             'category_id': tag_id or False,
         }
         print(partner_record)
+
         rec = res_partner.sudo().create(partner_record)
         # send email verification
         rec._send_profile_validation_email(**kw)
@@ -45,11 +46,23 @@ class Website(Website):
 
     @http.route('/profile/validate_email', type='http', auth='public', website=True, sitemap=False)
     def validate_email(self,token, user_id, email, **kwargs):
+        karma_val = request.env['res.partner'].sudo().browse(int(user_id)).karma
         done = request.env['res.partner'].sudo().browse(int(user_id))._process_profile_validation_token(token, email)
         if done:
             request.session['validation_email_done'] = True
-        url = kwargs.get('redirect_url', '/')
+        if(karma_val == 0):
+            url = kwargs.get('redirect_url', '/profile/validated')
+        else:
+            url = kwargs.get('redirect_url', '/profile/already-validated')
         return request.redirect(url)
+
+    @http.route('/profile/validated', type="http", auth='public', website=True)
+    def validate_email_message1(self):
+        return http.request.render('zts_webform_verification.form_confirm_validate')
+
+    @http.route('/profile/already-validated', type="http", auth='public', website=True)
+    def validate_email_message2(self):
+        return http.request.render('zts_webform_verification.form_confirm_already_validate')
 
     # @http.route('/profile/send_validation_email', type='json', auth='public', website=True)
     # def send_validation_email(self, **kwargs):
