@@ -14,7 +14,7 @@
                                 </div>
                                 <div class="col-lg-7 col-md-8">
                                     <input type="text" class="form-control o_website_form_input" name="contact_name"
-                                           required="" t-att-value="name or partner.name"/>
+                                           required="" t-att-value="name"/>
                                 </div>
                             </div>
                             <div class="form-group row form-field o_website_form_required_custom">
@@ -22,8 +22,8 @@
                                     <label class="col-form-label" for="phone">Phone</label>
                                 </div>
                                 <div class="col-lg-7 col-md-8">
-                                    <input type="text" class="form-control o_website_form_input" name="phone"
-                                           t-att-value="phone or partner.phone"/>
+                                    <input type="number" class="form-control o_website_form_input" name="phone"
+                                           t-att-value="phone"/>
                                 </div>
                             </div>
                             <div class="form-group row form-field o_website_form_required_custom">
@@ -32,7 +32,7 @@
                                 </div>
                                 <div class="col-lg-7 col-md-8">
                                     <input type="text" class="form-control o_website_form_input" name="email_from"
-                                           required="" t-att-value="email or partner.email"/>
+                                           required="" t-att-value="email"/>
                                 </div>
                             </div>
                             <!--                        <div class="w-100"/>-->
