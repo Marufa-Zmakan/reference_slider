@@ -26,7 +26,7 @@ class Website(Website):
     @http.route(['/form-submit'], type='http', auth='public', website=True)
     def upload_webform(self, redirect=None, **kw):
         res_partner = request.env['res.partner']
-        tag_id = request.env['res.partner.category'].sudo().search([('name', '=', 'BYH')], limit=1)
+        tag_id = request.env['res.partner.category'].sudo().search([('name', '=', 'BYH2022')], limit=1)
         print("86............", kw)
         partner_record = {
             'phone': kw.get('phone'),
