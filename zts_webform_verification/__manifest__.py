@@ -7,7 +7,7 @@
     'description': """Get webform details for verification""",
     'category': 'Website',
     'website': 'www.zmakan.com',
-    'depends' : ['website','base','website_profile'],
+    'depends' : ['website','base','website_profile','mail'],
     'data': [
         'views/portal_user_form.xml',
         'data/mail_template.xml'
