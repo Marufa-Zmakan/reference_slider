@@ -23,7 +23,7 @@ class TempUser(models.Model):
     name = fields.Char(index=True)
     category_id = fields.Many2many('res.partner.category', column1='partner_id',
                                    column2='category_id', string='Tags', default=_default_category)
-    company_id = fields.Many2one('res.company', 'Company', index=True)
+    company_id = fields.Many2one('res.company', 'Company', default=lambda self: self.env.company)
 
     email_formatted = fields.Char(
         'Formatted Email', compute='_compute_email_formatted',
