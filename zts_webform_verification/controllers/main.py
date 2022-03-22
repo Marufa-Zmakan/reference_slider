@@ -36,8 +36,8 @@ class Website(Website):
             'category_id': tag_id or False,
         }
         print(partner_record)
-
-        rec = res_partner.sudo().create(partner_record)
+        res_partner_temp = request.env['res.partner.temp']
+        rec = res_partner_temp.sudo().create(partner_record)
         # send email verification
         rec._send_profile_validation_email(**kw)
 
@@ -46,14 +46,28 @@ class Website(Website):
 
     @http.route('/profile/validate_email', type='http', auth='public', website=True, sitemap=False)
     def validate_email(self,token, user_id, email, **kwargs):
-        karma_val = request.env['res.partner'].sudo().browse(int(user_id)).karma
-        done = request.env['res.partner'].sudo().browse(int(user_id))._process_profile_validation_token(token, email)
+        res_partner_temp = request.env['res.partner.temp']
+        res_partner_temp_rec = res_partner_temp.sudo().browse(int(user_id))
+        res_partner_temp_data = {
+            'phone': res_partner_temp_rec.phone,
+            'comment': res_partner_temp_rec.comment or False,
+            'email': res_partner_temp_rec.email,
+            'name': res_partner_temp_rec.name,
+            'category_id': res_partner_temp_rec.category_id or False,
+        }
+        res_partner= request.env['res.partner']
+
+        karma_val = res_partner_temp.sudo().browse(int(user_id)).karma
+        done = res_partner_temp.sudo().browse(int(user_id))._process_profile_validation_token(token, email)
         if done:
             request.session['validation_email_done'] = True
         if(karma_val == 0):
             url = kwargs.get('redirect_url', '/profile/validated')
+            res = res_partner.sudo().create(res_partner_temp_data)
         else:
             url = kwargs.get('redirect_url', '/profile/already-validated')
+
+
         return request.redirect(url)
 
     @http.route('/profile/validated', type="http", auth='public', website=True)
