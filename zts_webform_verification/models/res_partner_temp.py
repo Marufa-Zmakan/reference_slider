@@ -71,7 +71,7 @@ class TempUser(models.Model):
             base_url = self.env['ir.config_parameter'].sudo().get_param('web.base.url')
             token_url = base_url + '/profile/validate_email?%s' % urls.url_encode(params)
             with self._cr.savepoint():
-                email_values = {'email_to': self.email}
+                email_values = {'email_to': self.email, 'email_from': self.company_id.email}
                 activation_template.sudo().with_context(token_url=token_url).send_mail(
                     self.id, email_values=email_values, force_send=True, raise_exception=True)
         return True
